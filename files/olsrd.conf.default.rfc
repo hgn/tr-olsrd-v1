@@ -1,0 +1,20 @@
+UseNiit                        no
+LinkQualityLevel               0
+LinkQualityFishEye             0
+
+Interface "wlan0"
+{
+}
+
+# This is only here to be able to generate a
+# configuration file with the script
+LoadPlugin "olsrd_jsoninfo.so.0.0"
+{
+}
+
+# This is only here to be able to generate a
+# configuration file with the script
+LoadPlugin "olsrd_txtinfo.so.0.1"
+{
+}
+
