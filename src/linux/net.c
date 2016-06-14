@@ -459,6 +459,14 @@ getsocket(int bufspace, struct interface_olsr *ifp)
     return -1;
   }
 
+  {
+	  struct ip_mreq mreq;
+#define HELLO_GROUP "224.0.1.0"
+	  mreq.imr_multiaddr.s_addr=inet_addr(HELLO_GROUP);
+	  mreq.imr_interface.s_addr=htonl(INADDR_ANY);
+	  setsockopt(sock,IPPROTO_IP,IP_ADD_MEMBERSHIP,&mreq,sizeof(mreq));
+  }
+
   setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &mcast_ttl, sizeof(mcast_ttl));
 
   memset(&sin, 0, sizeof(sin));
