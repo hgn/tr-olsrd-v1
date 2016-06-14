@@ -409,6 +409,7 @@ int
 getsocket(int bufspace, struct interface_olsr *ifp)
 {
   struct sockaddr_in sin;
+  int mcast_ttl = 5;
   int on;
   int sock = socket(AF_INET, SOCK_DGRAM, 0);
   if (sock < 0) {
@@ -457,6 +458,8 @@ getsocket(int bufspace, struct interface_olsr *ifp)
     close(sock);
     return -1;
   }
+
+  setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &mcast_ttl, sizeof(mcast_ttl));
 
   memset(&sin, 0, sizeof(sin));
   sin.sin_family = AF_INET;
